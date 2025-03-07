@@ -3,7 +3,11 @@ import { useCallback, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { MAP_CONTAINER_ID, WATER_FILL_COLOR } from "../constants";
 import mainSlice from "../mainSlice";
-import { addCountriesLayer, useCountriesGeojson } from "./countries";
+import {
+    addCountriesLayer,
+    useCountriesGeojson,
+    useLakesGeojson,
+} from "./countries";
 import { addStatesLabelsLayer, addStatesLayer, useStates } from "./states";
 
 let map = null;
@@ -14,8 +18,9 @@ export const useInitMap = () => {
     const dispatch = useDispatch();
     const states = useStates();
     const countriesGeojson = useCountriesGeojson();
+    const lakesGeojson = useLakesGeojson();
     useEffect(() => {
-        if (!states || !countriesGeojson) {
+        if (!states || !countriesGeojson || !lakesGeojson) {
             return;
         }
         map = new maplibre.Map({
@@ -33,7 +38,8 @@ export const useInitMap = () => {
                 version: 8,
             },
             center: [0, 0],
-            zoom: 2.5,
+            zoom: 2,
+            minZoom: 2,
         });
 
         // Use globe projection
@@ -55,7 +61,7 @@ export const useInitMap = () => {
             map.remove();
             map = null;
         };
-    }, [countriesGeojson, dispatch, states]);
+    }, [countriesGeojson, dispatch, lakesGeojson, states]);
 };
 
 // Safeguards map utility functions from being called before the map has

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
+import HoveredState from "../HoveredState/HoveredState";
 import { addMouseMoveListener } from "../addMouseListener";
 import { MAP_CONTAINER_ID } from "../constants";
-import HoveredState from "../HoveredState/HoveredState";
 
 let showPopupTimeout = null;
 

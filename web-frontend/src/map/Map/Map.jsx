@@ -7,6 +7,7 @@ import StarsBackground from "../../StarsBackground/StarsBackground";
 import { getStateAtPoint } from "../getStateAtPoint";
 import { useAddMapClickListener, useFlyToBbox, useInitMap } from "../map";
 import { useFlyToState } from "../useFlyToState";
+import { useShowHoveredState } from "../useShowHoveredState";
 import styles from "./Map.module.css";
 
 let hasFlown = false;
@@ -43,6 +44,9 @@ const Map = () => {
         });
     }, [addMapClickListener, dispatch, flyToState]);
 
+    // On map hover, show info pop-up
+    const hoveredState = useShowHoveredState();
+
     return (
         <div
             className={classNames(styles.container, {
@@ -52,6 +56,7 @@ const Map = () => {
             <StarsBackground />
             <div className={styles.loading}>Loading...</div>
             <div className={styles.map} id={MAP_CONTAINER_ID} />
+            {hoveredState}
         </div>
     );
 };

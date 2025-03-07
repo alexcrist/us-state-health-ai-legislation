@@ -8,10 +8,10 @@ const ProjectInfo = () => {
             <div className={styles.header}>
                 <div className={styles.headerTexts}>
                     <h1 className={styles.headerText}>
-                        Global Voice Datasets Repository Map
+                        US State Health AI Legislation
                     </h1>
                     <h3 className={styles.subheaderText}>
-                        Accessibility, Licensing, and Research Ethics
+                        Insurance, Infrastructure, and Privacy Laws
                     </h3>
                 </div>
             </div>
