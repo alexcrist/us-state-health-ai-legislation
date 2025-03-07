@@ -1,6 +1,5 @@
 .container {
     flex: 1;
-    background: #eee;
     align-items: center;
     justify-content: center;
     position: relative;
@@ -10,15 +9,28 @@
 
 .loading {
     font-size: 16px;
-    color: #333;
+    color: #fff;
     font-style: italic;
     text-align: center;
+    position: absolute;
+    transition: all 200ms;
+}
+
+.isMapInitialized .loading {
+    opacity: 0;
 }
 
 .map {
-    display: none;
+    opacity: 0;
+    transition: all 2000ms;
+    transition-delay: 100ms;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
 }
 
-.map.isMapInitialized {
-    display: block;
+.isMapInitialized .map {
+    opacity: 1;
 }

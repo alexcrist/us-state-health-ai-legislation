@@ -1,10 +1,12 @@
 import classNames from "classnames";
-import _ from "lodash";
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { MAP_CONTAINER_ID } from "../../constants";
-import { useInitMap, useMapResize } from "../map";
+import StarsBackground from "../../StarsBackground/StarsBackground";
+import { useFlyToBbox, useInitMap } from "../map";
 import styles from "./Map.module.css";
+
+let hasFlown = false;
 
 const Map = () => {
     // Initialize the map
@@ -13,49 +15,26 @@ const Map = () => {
     );
     useInitMap();
 
-    // Calculate map dimensions
-    const ref = useRef();
-    const mapResize = useMapResize();
-    const [mapDims, setMapDims] = useState({
-        width: window.innerWidth / 2,
-        height: window.innerHeight / 2,
-    });
-    const updateMapHeight = useCallback(() => {
-        if (ref.current) {
-            const { width, height } = ref.current.getBoundingClientRect();
-            setMapDims({ width, height });
-            mapResize();
-        }
-    }, [mapResize]);
+    // Fly to target on load
+    const flyToBbox = useFlyToBbox();
     useEffect(() => {
-        if (ref.current) {
-            updateMapHeight();
-            const onResize = _.debounce(updateMapHeight, 75, {
-                maxWait: 300,
-                leading: false,
-                trailing: true,
+        if (isMapInitialized && !hasFlown) {
+            hasFlown = true;
+            flyToBbox([-125.0011, 24.9493, -66.9326, 49.5904], {
+                duration: 4000,
             });
-            const resizeObserver = new ResizeObserver(onResize);
-            resizeObserver.observe(ref.current);
-            return () => resizeObserver.disconnect();
         }
-    }, [updateMapHeight]);
+    }, [flyToBbox, isMapInitialized]);
 
     return (
-        <div className={styles.container} ref={ref}>
-            <div
-                className={classNames(styles.map, {
-                    [styles.isMapInitialized]: isMapInitialized,
-                })}
-                id={MAP_CONTAINER_ID}
-                style={{
-                    width: `${mapDims.width}px`,
-                    height: `${mapDims.height}px`,
-                }}
-            />
-            {!isMapInitialized && (
-                <div className={styles.loading}>Loading...</div>
-            )}
+        <div
+            className={classNames(styles.container, {
+                [styles.isMapInitialized]: isMapInitialized,
+            })}
+        >
+            <StarsBackground />
+            <div className={styles.loading}>Loading...</div>
+            <div className={styles.map} id={MAP_CONTAINER_ID} />
         </div>
     );
 };

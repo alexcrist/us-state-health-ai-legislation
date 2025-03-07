@@ -3,8 +3,8 @@ import { useCallback, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { MAP_CONTAINER_ID } from "../constants";
 import mainSlice from "../mainSlice";
-import { addCountriesLayer, useCountries } from "./countries";
-import { addStatesLayer, useStates } from "./states";
+import { useCountriesGeojson } from "./countries";
+import { addStatesLabelsLayer, addStatesLayer, useStates } from "./states";
 
 const OCEAN_FILL_COLOR = "#99AEF3";
 
@@ -14,15 +14,16 @@ export const getMap = () => map;
 
 export const useInitMap = () => {
     const dispatch = useDispatch();
-    const countries = useCountries();
     const states = useStates();
+    const countriesGeojson = useCountriesGeojson();
     useEffect(() => {
-        if (!countries || !states) {
+        if (!states || !countriesGeojson) {
             return;
         }
         map = new maplibre.Map({
             container: MAP_CONTAINER_ID,
             style: {
+                glyphs: "./{fontstack}/{range}.pbf",
                 layers: [
                     {
                         id: "background",
@@ -33,14 +34,23 @@ export const useInitMap = () => {
                 sources: {},
                 version: 8,
             },
-            center: [27, -17],
+            center: [0, 0],
             zoom: 2.5,
+        });
+
+        // Use globe projection
+        map.on("style.load", () => {
+            map.setProjection({ type: "globe" });
         });
 
         // Set map as initialized upon loading
         map.on("load", async () => {
-            await addCountriesLayer(map);
+            addGeoJsonLayer(map, countriesGeojson, {
+                strokeOpacity: 0.1,
+                strokeWidth: 1,
+            });
             await addStatesLayer(map);
+            await addStatesLabelsLayer(map);
             dispatch(mainSlice.actions.setIsMapInitialized(true));
         });
 
@@ -50,7 +60,7 @@ export const useInitMap = () => {
             map.remove();
             map = null;
         };
-    }, [countries, dispatch, states]);
+    }, [countriesGeojson, dispatch, states]);
 };
 
 // Safeguards map utility functions from being called before the map has
