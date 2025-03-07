@@ -1,20 +1,19 @@
-import { useEffect } from "react";
-import { useAddMapClickListener } from "../map/map";
+import Header from "../Header/Header";
+import InfoCard from "../InfoCard/InfoCard";
 import Map from "../map/Map/Map";
 import styles from "./App.module.css";
 
 const App = () => {
-    const addMapClickListener = useAddMapClickListener();
-    useEffect(() => {
-        return addMapClickListener((event) => {
-            console.log("event", event.lngLat.lng);
-            console.log("event", event.lngLat.lat);
-        });
-    }, [addMapClickListener]);
-
     return (
         <div className={styles.container}>
-            <Map />
+            <Header isMobile />
+            <div className={styles.content}>
+                <div className={styles.infoCardContainer}>
+                    <Header />
+                    <InfoCard />
+                </div>
+                <Map />
+            </div>
         </div>
     );
 };

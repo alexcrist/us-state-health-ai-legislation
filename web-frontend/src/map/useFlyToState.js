@@ -1,22 +1,20 @@
 import { useCallback } from "react";
 import { useFlyToBbox, useFlyToPoint } from "./map";
 
-const FLY_TO_POINT_ZOOM = 3;
-
 // Fly to a state
 export const useFlyToState = () => {
     const flyToBbox = useFlyToBbox();
     const flyToPoint = useFlyToPoint();
     return useCallback(
-        (entityData) => {
-            const minLon = entityData.bbox[0];
-            const maxLon = entityData.bbox[2];
-            const lonDiff = maxLon - minLon;
-            if (lonDiff > 180) {
-                const [lon, lat] = entityData.coordLonLat;
-                flyToPoint(lon, lat, FLY_TO_POINT_ZOOM);
+        (state) => {
+            if (state.name === "Alaska") {
+                const [lon, lat] = state.coordLonLat;
+                flyToPoint(lon, lat, 2.7);
+            } else if (state.name === "Hawaii") {
+                const [lon, lat] = state.coordLonLat;
+                flyToPoint(lon, lat, 4);
             } else {
-                flyToBbox(entityData.bbox);
+                flyToBbox(state.bbox);
             }
         },
         [flyToBbox, flyToPoint],

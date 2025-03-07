@@ -1,37 +1,39 @@
 import { useDispatch, useSelector } from "react-redux";
-import { getStateDatasets } from "../datasets/getEntityDatasets";
-import { getStateWord } from "../entities/getStateWord";
-import EntityInfo from "../EntityInfo/EntityInfo";
+import CardSection from "../CardSection/CardSection";
+import CardSectionBackButton from "../CardSectionBackButton/CardSectionBackButton";
+import { USA_BBOX } from "../constants";
 import mainSlice from "../mainSlice";
-import { useFlyToEntity } from "../map/useFlyToState";
+import { useFlyToBbox } from "../map/map";
 
 const StateInfo = () => {
     const dispatch = useDispatch();
-    const flyToEntity = useFlyToEntity();
-    const focusedCountry = useSelector((state) => state.main.focusedCountry);
+    const flyToBbox = useFlyToBbox();
     const focusedState = useSelector((state) => state.main.focusedState);
-    if (!focusedCountry || !focusedState) {
+    if (!focusedState) {
         return null;
     }
     const onClickBack = () => {
         dispatch(mainSlice.actions.setFocusedState(null));
-        flyToEntity(focusedCountry);
+        flyToBbox(USA_BBOX, { duration: 1000 });
     };
+
+    // TODO
+    const datasets = [];
+
     return (
-        <EntityInfo
-            title={`${focusedState.name}, ${focusedCountry.name}`}
-            extraDescriptions={[
-                `${getStateWord(focusedCountry.codeIso3)} Name: ${focusedState.name}`,
-                `Country Name: ${focusedCountry.name}`,
-            ]}
-            getDatasets={() =>
-                getStateDatasets(
-                    focusedCountry.codeIso3,
-                    focusedState.stateCode,
-                )
-            }
-            onClickBack={onClickBack}
-        />
+        <>
+            <CardSectionBackButton onClick={onClickBack} />
+            <CardSection
+                title={focusedState?.name}
+                descriptions={[
+                    `State Name: ${focusedState?.name}`,
+                    `Number of Datasets: ${datasets.length}`,
+                ]}
+            />
+            <CardSection title={`Datasets (${datasets.length})`}>
+                TODO
+            </CardSection>
+        </>
     );
 };
 

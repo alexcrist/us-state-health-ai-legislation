@@ -2,9 +2,6 @@ import { bbox } from "@turf/turf";
 import { useEffect, useState } from "react";
 import { addGeoJsonLayer } from "./map";
 
-const STATE_FILL_COLOR = "#fff";
-const STATE_STROKE_COLOR = "#000";
-
 const STATES_GEOJSON_PROMISE = (async () => {
     const geojson = (await import("./usa-states.json")).default;
     return geojson;
@@ -24,6 +21,11 @@ const STATES_PROMISE = (async () => {
     });
 })();
 
+export const getStates = async () => {
+    const states = await STATES_PROMISE;
+    return states;
+};
+
 export const useStates = () => {
     const [countries, setCountries] = useState(null);
     useEffect(() => {
@@ -38,9 +40,8 @@ export const useStates = () => {
 export const addStatesLayer = async (map) => {
     const geojson = await STATES_GEOJSON_PROMISE;
     addGeoJsonLayer(map, geojson, {
-        fillColor: STATE_FILL_COLOR,
-        fillOpacity: 1,
-        strokeColor: STATE_STROKE_COLOR,
+        fillOpacity: 0,
+        strokeColor: "#000",
         strokeOpacity: 1,
         strokeWidth: 1,
     });

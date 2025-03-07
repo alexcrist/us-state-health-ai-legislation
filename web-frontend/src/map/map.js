@@ -1,12 +1,10 @@
 import maplibre from "maplibre-gl";
 import { useCallback, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { MAP_CONTAINER_ID } from "../constants";
+import { MAP_CONTAINER_ID, WATER_FILL_COLOR } from "../constants";
 import mainSlice from "../mainSlice";
-import { useCountriesGeojson } from "./countries";
+import { addCountriesLayer, useCountriesGeojson } from "./countries";
 import { addStatesLabelsLayer, addStatesLayer, useStates } from "./states";
-
-const OCEAN_FILL_COLOR = "#99AEF3";
 
 let map = null;
 
@@ -28,7 +26,7 @@ export const useInitMap = () => {
                     {
                         id: "background",
                         type: "background",
-                        paint: { "background-color": OCEAN_FILL_COLOR },
+                        paint: { "background-color": WATER_FILL_COLOR },
                     },
                 ],
                 sources: {},
@@ -45,10 +43,7 @@ export const useInitMap = () => {
 
         // Set map as initialized upon loading
         map.on("load", async () => {
-            addGeoJsonLayer(map, countriesGeojson, {
-                strokeOpacity: 0.1,
-                strokeWidth: 1,
-            });
+            await addCountriesLayer(map);
             await addStatesLayer(map);
             await addStatesLabelsLayer(map);
             dispatch(mainSlice.actions.setIsMapInitialized(true));
@@ -187,7 +182,7 @@ export const addGeoJsonLayer = (
     };
 };
 
-const DEFAULT_FLY_TO_BBOX_OPTIONS = { padding: 100 };
+const DEFAULT_FLY_TO_BBOX_OPTIONS = { duration: 1000 };
 
 export const useFlyToBbox = () => {
     const createMapUtilityFunction = useCreateMapUtilityFunction();

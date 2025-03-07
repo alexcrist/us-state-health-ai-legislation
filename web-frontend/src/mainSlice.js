@@ -5,7 +5,6 @@ const mainSlice = createSlice({
     initialState: {
         isMapInitialized: false,
         focusedState: null,
-        menuWidthPx: 500,
     },
     reducers: {
         setIsMapInitialized: (state, action) => {
@@ -13,9 +12,6 @@ const mainSlice = createSlice({
         },
         setFocusedState: (state, action) => {
             state.focusedState = action.payload;
-        },
-        setMenuWidthPx: (state, action) => {
-            state.menuWidthPx = action.payload;
         },
     },
 });

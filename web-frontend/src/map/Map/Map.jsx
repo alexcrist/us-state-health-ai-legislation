@@ -1,9 +1,12 @@
 import classNames from "classnames";
 import { useEffect } from "react";
-import { useSelector } from "react-redux";
-import { MAP_CONTAINER_ID } from "../../constants";
+import { useDispatch, useSelector } from "react-redux";
+import { MAP_CONTAINER_ID, USA_BBOX } from "../../constants";
+import mainSlice from "../../mainSlice";
 import StarsBackground from "../../StarsBackground/StarsBackground";
-import { useFlyToBbox, useInitMap } from "../map";
+import { getStateAtPoint } from "../getStateAtPoint";
+import { useAddMapClickListener, useFlyToBbox, useInitMap } from "../map";
+import { useFlyToState } from "../useFlyToState";
 import styles from "./Map.module.css";
 
 let hasFlown = false;
@@ -20,11 +23,25 @@ const Map = () => {
     useEffect(() => {
         if (isMapInitialized && !hasFlown) {
             hasFlown = true;
-            flyToBbox([-125.0011, 24.9493, -66.9326, 49.5904], {
-                duration: 4000,
-            });
+            flyToBbox(USA_BBOX, { duration: 2000 });
         }
     }, [flyToBbox, isMapInitialized]);
+
+    // Allow state selection
+    const addMapClickListener = useAddMapClickListener();
+    const flyToState = useFlyToState();
+    const dispatch = useDispatch();
+    useEffect(() => {
+        return addMapClickListener(async (event) => {
+            const lon = event.lngLat.lng;
+            const lat = event.lngLat.lat;
+            const state = await getStateAtPoint(lon, lat);
+            if (state) {
+                dispatch(mainSlice.actions.setFocusedState(state));
+                flyToState(state);
+            }
+        });
+    }, [addMapClickListener, dispatch, flyToState]);
 
     return (
         <div
