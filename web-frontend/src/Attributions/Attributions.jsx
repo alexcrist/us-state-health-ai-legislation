@@ -4,7 +4,7 @@ const ATTRIBUTIONS = [
     {
         key: "Country and State Borders",
         value: "Natural Earth",
-        url: "https://www.naturalearthdata.com/downloads/10m-cultural-vectors/",
+        url: "https://www.naturalearthdata.com/",
     },
     {
         key: "Software Dependencies",

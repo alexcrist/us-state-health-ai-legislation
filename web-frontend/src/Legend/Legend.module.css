@@ -1,0 +1,33 @@
+.card {
+    left: unset;
+    top: unset;
+    bottom: 10px;
+    right: 10px;
+    padding: 10px;
+    border-radius: 4px;
+    position: absolute;
+}
+
+.title {
+    font-size: 18px;
+}
+
+.legendContent {
+    display: flex;
+    margin-top: 10px;
+    font-size: 14px;
+}
+
+@media (max-aspect-ratio: 1) {
+    .card {
+        padding: 5px;
+    }
+
+    .title {
+        font-size: 14px;
+    }
+
+    .legendContent {
+        font-size: 12px;
+    }
+}

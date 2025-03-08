@@ -2,6 +2,7 @@ import classNames from "classnames";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { MAP_CONTAINER_ID, USA_BBOX } from "../../constants";
+import Legend from "../../Legend/Legend";
 import mainSlice from "../../mainSlice";
 import StarsBackground from "../../StarsBackground/StarsBackground";
 import { getStateAtPoint } from "../getStateAtPoint";
@@ -57,6 +58,7 @@ const Map = () => {
             <div className={styles.loading}>Loading...</div>
             <div className={styles.map} id={MAP_CONTAINER_ID} />
             {hoveredState}
+            <Legend />
         </div>
     );
 };

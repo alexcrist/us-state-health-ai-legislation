@@ -2,7 +2,7 @@ import { bbox } from "@turf/turf";
 import { useEffect, useState } from "react";
 import { addGeoJsonLayer } from "./map";
 
-const STATES_GEOJSON_PROMISE = (async () => {
+export const STATES_GEOJSON_PROMISE = (async () => {
     const geojson = (await import("./usa-states.json")).default;
     return geojson;
 })();
