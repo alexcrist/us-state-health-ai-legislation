@@ -1,6 +1,10 @@
 import { bbox } from "@turf/turf";
+import _ from "lodash";
 import { useEffect, useState } from "react";
+import { getStateColor } from "./getStateColor";
+import { STATE_CODE_TO_LEGISLATIONS_MAP_PROMISE } from "./legislationData";
 import { addGeoJsonLayer } from "./map";
+import { sanitizeStateCode } from "./sanitizeStateCode";
 
 export const STATES_GEOJSON_PROMISE = (async () => {
     const geojson = (await import("./usa-states.json")).default;
@@ -8,17 +12,44 @@ export const STATES_GEOJSON_PROMISE = (async () => {
 })();
 
 const STATES_PROMISE = (async () => {
+    // Parse state data from geojson
     const geojson = await STATES_GEOJSON_PROMISE;
-    return geojson.features.map((feature) => {
+    let states = geojson.features.map((feature) => {
         const { properties } = feature;
         return {
             name: properties.name,
-            code: properties.postal,
+            code: sanitizeStateCode(properties.postal),
             geojson: feature,
             bbox: bbox(feature),
             coordLonLat: [properties.longitude, properties.latitude],
         };
     });
+
+    // Validate legislation data
+    const stateCodeToLegislationsMap =
+        await STATE_CODE_TO_LEGISLATIONS_MAP_PROMISE;
+    const validStateCodeSet = new Set(_.map(states, "code"));
+    Object.keys(stateCodeToLegislationsMap).forEach((stateCode) => {
+        if (!validStateCodeSet.has(stateCode)) {
+            console.warn(
+                `Unknown state code found in legislation data Google Sheet: ${stateCode}. This row will be ignored`,
+            );
+        }
+    });
+
+    // Add legislation data to states
+    states = states.map((state) => {
+        const legislations = stateCodeToLegislationsMap[state.code] ?? [];
+        return { ...state, legislations };
+    });
+
+    // Add color to states
+    states = states.map((state) => {
+        const color = getStateColor(states, state);
+        return { ...state, color };
+    });
+
+    return states;
 })();
 
 export const getStates = async () => {
@@ -37,7 +68,25 @@ export const useStates = () => {
     return countries;
 };
 
-export const addStatesLayer = async (map) => {
+export const addStatesFillLayer = async (map) => {
+    const states = await STATES_PROMISE;
+    const statesGeoJson = {
+        type: "FeatureCollection",
+        features: states.map((state) => {
+            return {
+                ...state.geojson,
+                properties: { color: state.color },
+            };
+        }),
+    };
+    addGeoJsonLayer(map, statesGeoJson, {
+        strokeOpacity: 0,
+        fillOpacity: 1,
+        extraPaintOptions: { "fill-color": ["get", "color"] },
+    });
+};
+
+export const addStatesStrokeLayer = async (map) => {
     const geojson = await STATES_GEOJSON_PROMISE;
     addGeoJsonLayer(map, geojson, {
         fillOpacity: 0,
@@ -104,48 +153,5 @@ export const addStatesLabelsLayer = async (map) => {
                 1, // Opaque isible at zoom 3
             ],
         },
-    });
-};
-
-export const addAlaskaHawaiiRectangles = (map) => {
-    const left = -134.5;
-    const top = 27.3;
-    const middle = -116.75;
-    const right = -107.8;
-    const bottom = 17;
-    const lineString = {
-        type: "FeatureCollection",
-        features: [
-            {
-                type: "Feature",
-                geometry: {
-                    type: "LineString",
-                    coordinates: [
-                        [left, top],
-                        [left, bottom],
-                        [right, bottom],
-                        [right, top],
-                        [left, top],
-                    ],
-                },
-                properties: {},
-            },
-            {
-                type: "Feature",
-                geometry: {
-                    type: "LineString",
-                    coordinates: [
-                        [middle, top],
-                        [middle, bottom],
-                    ],
-                },
-                properties: {},
-            },
-        ],
-    };
-    addGeoJsonLayer(map, lineString, {
-        strokeWidth: 1,
-        fillOpacity: 1,
-        fillColor: "#99AEF3",
     });
 };

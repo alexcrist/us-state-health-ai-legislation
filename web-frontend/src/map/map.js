@@ -3,12 +3,14 @@ import { useCallback, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { MAP_CONTAINER_ID, WATER_FILL_COLOR } from "../constants";
 import mainSlice from "../mainSlice";
+import { addCountriesLayer, useCountriesGeojson } from "./countries";
+import { addLakesLayer, useLakesGeojson } from "./lakes";
 import {
-    addCountriesLayer,
-    useCountriesGeojson,
-    useLakesGeojson,
-} from "./countries";
-import { addStatesLabelsLayer, addStatesLayer, useStates } from "./states";
+    addStatesFillLayer,
+    addStatesLabelsLayer,
+    addStatesStrokeLayer,
+    useStates,
+} from "./states";
 
 let map = null;
 
@@ -50,7 +52,9 @@ export const useInitMap = () => {
         // Set map as initialized upon loading
         map.on("load", async () => {
             await addCountriesLayer(map);
-            await addStatesLayer(map);
+            await addStatesFillLayer(map);
+            await addLakesLayer(map);
+            await addStatesStrokeLayer(map);
             await addStatesLabelsLayer(map);
             dispatch(mainSlice.actions.setIsMapInitialized(true));
         });

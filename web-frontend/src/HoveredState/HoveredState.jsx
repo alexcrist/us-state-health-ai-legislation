@@ -57,12 +57,11 @@ const HoveredState = ({ x, y }) => {
         (async () => {
             // State is being hovered
             if (hoveredState) {
-                const numDatasets = 0; // TODO
                 setContent({
                     title: `${hoveredState.name}`,
                     descriptions: [
-                        `Number of Datasets: ${numDatasets}`,
-                        `State Name: ${hoveredState.name}`,
+                        `Name: ${hoveredState.name}`,
+                        `Legislative Bills: ${hoveredState.legislations.length}`,
                     ],
                 });
             }
