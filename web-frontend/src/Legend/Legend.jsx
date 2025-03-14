@@ -53,7 +53,7 @@ const Legend = () => {
                             />
                         </div>
                         <div className={styles.legendItemText}>
-                            {maxNumLegislations} Datasets
+                            {maxNumLegislations} Legislative Bills
                         </div>
                     </div>
                     {maxNumLegislations > 3 && (
@@ -72,7 +72,9 @@ const Legend = () => {
                                 }}
                             />
                         </div>
-                        <div className={styles.legendItemText}>2 Datasets</div>
+                        <div className={styles.legendItemText}>
+                            2 Legislative Bills
+                        </div>
                     </div>
                     <div className={styles.legendItem}>
                         <div className={styles.legendItemColor}>
@@ -87,7 +89,9 @@ const Legend = () => {
                                 }}
                             />
                         </div>
-                        <div className={styles.legendItemText}>1 Dataset</div>
+                        <div className={styles.legendItemText}>
+                            1 Legislative Bill
+                        </div>
                     </div>
                     <div className={styles.legendItem}>
                         <div className={styles.legendItemColor}>
@@ -99,7 +103,9 @@ const Legend = () => {
                                 }}
                             />
                         </div>
-                        <div className={styles.legendItemText}>0 Datasets</div>
+                        <div className={styles.legendItemText}>
+                            0 Legislative Bills
+                        </div>
                     </div>
                 </div>
             </div>
