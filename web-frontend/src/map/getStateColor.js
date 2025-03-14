@@ -18,7 +18,13 @@ export const getStateColor = (states, state) => {
         return NO_DATA_COLOR;
     }
     const maxNumLegislations = _(states).map("legislations.length").maxBy();
-    // const scaleFunction = (x) => Math.log2(x - 1);
+    return getNumLegislationsColor(numLegislations, maxNumLegislations);
+};
+
+export const getNumLegislationsColor = (
+    numLegislations,
+    maxNumLegislations,
+) => {
     const scaleFunction = (x) => x - 1;
     const colorPercent =
         scaleFunction(numLegislations) / scaleFunction(maxNumLegislations);

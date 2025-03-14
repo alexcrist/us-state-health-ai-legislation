@@ -18,7 +18,7 @@ const ProjectInfo = () => {
             <CardSection
                 title="About"
                 descriptions={[
-                    "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+                    "The development and use of artificial intelligence in health care settings is growing rapidly in the United States. State legislatures are subsequently working to pass legislation regulating the novel ethical and legal situations that arise. This map tracks enacted US state legislation that relates, directly or indirectly, to the medical applications of artificial intelligence, including algorithms, machine learning, and predictive modeling. Overall, the states demonstrate and thus were categorized into four main groups: data privacy, insurance, infrastructure, and task force.",
                 ]}
             />
             <CardSection
