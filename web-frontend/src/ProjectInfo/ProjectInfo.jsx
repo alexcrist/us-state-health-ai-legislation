@@ -1,11 +1,10 @@
 import { Attributions } from "../Attributions/Attributions";
 import CardSection from "../CardSection/CardSection";
-import styles from "./ProjectInfo.module.css";
 
 const ProjectInfo = () => {
     return (
         <>
-            <div className={styles.header}>
+            {/* <div className={styles.header}>
                 <div className={styles.headerTexts}>
                     <h1 className={styles.headerText}>
                         US State Health AI Legislation
@@ -14,7 +13,7 @@ const ProjectInfo = () => {
                         Insurance, Infrastructure, and Privacy Laws
                     </h3>
                 </div>
-            </div>
+            </div> */}
             <CardSection
                 title="About"
                 descriptions={[

@@ -1,7 +1,7 @@
 {
     "type": "module",
     "scripts": {
-        "dev": "vite --open",
+        "dev": "vite --open --host",
         "build": "vite build",
         "preview": "vite preview",
         "deploy": "vite build && gh-pages -d dist"

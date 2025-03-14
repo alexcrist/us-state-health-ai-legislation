@@ -8,7 +8,14 @@ const Header = ({ isMobile }) => {
                 [styles.isMobile]: isMobile,
             })}
         >
-            [Insert logo here]
+            <div className={styles.headerTexts}>
+                <h1 className={styles.headerText}>
+                    US State Health AI Legislation
+                </h1>
+                <h3 className={styles.subheaderText}>
+                    Insurance, Infrastructure, and Privacy Laws
+                </h3>
+            </div>
         </div>
     );
 };
