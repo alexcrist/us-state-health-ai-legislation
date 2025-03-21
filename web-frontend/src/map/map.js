@@ -1,4 +1,5 @@
 import maplibre from "maplibre-gl";
+import "maplibre-gl/dist/maplibre-gl.css";
 import { useCallback, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { MAP_CONTAINER_ID, WATER_FILL_COLOR } from "../constants";
@@ -133,7 +134,8 @@ const DEFAULT_RENDER_GEO_JSON_OPTIONS = {
     strokeWidth: 2,
     fillColor: "white",
     fillOpacity: 0.5,
-    extraPaintOptions: {},
+    extraFillPaintOptions: {},
+    extraStrokePaintOptions: {},
 };
 
 export const useRenderGeoJson = () => {
@@ -160,7 +162,8 @@ export const addGeoJsonLayer = (
     const sourceId = `geo-json-${Math.random()}`;
     const fillLayerId = `${sourceId}-fill`;
     const strokeLayerId = `${sourceId}-stroke`;
-    const extraPaintOptions = getOption("extraPaintOptions");
+    const extraFillPaintOptions = getOption("extraFillPaintOptions");
+    const extraStrokePaintOptions = getOption("extraStrokePaintOptions");
     map.addSource(sourceId, { type: "geojson", data: geojson });
     map.addLayer(
         {
@@ -170,7 +173,7 @@ export const addGeoJsonLayer = (
             paint: {
                 "fill-color": getOption("fillColor"),
                 "fill-opacity": getOption("fillOpacity"),
-                ...extraPaintOptions,
+                ...extraFillPaintOptions,
             },
         },
         beforeLayerId,
@@ -184,6 +187,7 @@ export const addGeoJsonLayer = (
                 "line-color": getOption("strokeColor"),
                 "line-opacity": getOption("strokeOpacity"),
                 "line-width": getOption("strokeWidth"),
+                ...extraStrokePaintOptions,
             },
         },
         beforeLayerId,

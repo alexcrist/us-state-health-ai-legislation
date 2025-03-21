@@ -3,7 +3,6 @@
 }
 
 .header {
-    background-color: #88e88099;
     padding: 5px 10px;
     display: flex;
     align-items: center;
@@ -13,7 +12,6 @@
 }
 
 .isExpanded .header {
-    background-color: #369c3cee;
     color: white;
 }
 
@@ -37,13 +35,12 @@
 }
 
 .details {
-    border: 2px solid #88e88033;
     border-bottom-left-radius: 2px;
     border-bottom-right-radius: 2px;
 }
 
 .isExpanded .details {
-    border: 3px solid #369c3cee;
+    border: 3px solid red;
 }
 
 .details a {
@@ -57,10 +54,6 @@
     flex-wrap: wrap;
     justify-content: flex-start;
     padding: 4px;
-}
-
-.legislation:nth-child(odd) {
-    background-color: #88e88033;
 }
 
 .legislationKey {
