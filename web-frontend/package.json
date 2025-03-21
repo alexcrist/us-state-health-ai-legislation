@@ -4,7 +4,7 @@
         "dev": "vite --open --host",
         "build": "vite build",
         "preview": "vite preview",
-        "deploy": "vite build && gh-pages -d dist --cname medailaws.thehastingscenter.org"
+        "deploy": "vite build && gh-pages -d dist --cname med-ai-laws.thehastingscenter.org"
     },
     "dependencies": {
         "@reduxjs/toolkit": "^2.2.7",
