@@ -1,67 +1,12 @@
-.attributions {
-    margin-top: 10px;
-}
-
-.attribution {
+.citationTitle {
     font-size: 12px;
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 5px;
-    line-height: 1.25;
-}
-
-.attributionKey {
+    line-height: 1.5;
     font-weight: bold;
-    padding: 2px 0;
-    margin-right: 5px;
-}
-
-.attributionValue {
-    padding: 2px 0;
-}
-
-.attributionUrl {
-    font-size: 10px;
+    margin-top: 12px;
     margin-bottom: 5px;
-    word-break: break-all;
 }
 
-.attribution ul {
-    padding: 0;
-    margin: 0;
-}
-
-.attribution li {
-    padding: 0;
-    display: flex;
-    align-items: center;
-}
-
-.attribution li::before {
-    content: "•";
-    flex: 0;
-    margin-right: 5px;
-}
-
-.line {
-    flex: 1;
-    height: 1px;
-    background-color: #eee;
-    margin: 0 10px;
-}
-
-.header {
-    display: flex;
-    text-align: center;
-    align-items: center;
-    justify-content: center;
-    border-bottom: 1px solid #ddd;
-    padding: 10px 15px;
-}
-
-.subheaderText {
-    line-height: 1.2;
-    margin-top: 7px;
-    font-size: 16px;
-    opacity: 0.5;
+.citation {
+    font-size: 12px;
+    line-height: 1.5;
 }

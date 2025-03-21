@@ -2,6 +2,10 @@
     margin-top: 10px;
 }
 
+.attribution * {
+    line-height: 1.5;
+}
+
 .attribution {
     font-size: 12px;
     display: flex;
