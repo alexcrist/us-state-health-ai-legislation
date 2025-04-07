@@ -5,6 +5,12 @@ import styles from "./ProjectInfo.module.css";
 const ProjectInfo = () => {
     return (
         <>
+            <CardSection>
+                <h2 className={styles.title}>US State Health AI Legislation</h2>
+                <h3 className={styles.subtitle}>
+                    Insurance, Infrastructure, and Privacy Laws
+                </h3>
+            </CardSection>
             <CardSection
                 title="About"
                 descriptions={[

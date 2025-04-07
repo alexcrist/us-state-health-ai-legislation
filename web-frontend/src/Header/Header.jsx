@@ -8,13 +8,20 @@ const Header = ({ isMobile }) => {
                 [styles.isMobile]: isMobile,
             })}
         >
-            <div className={styles.headerTexts}>
-                <h1 className={styles.headerText}>
-                    US State Health AI Legislation
-                </h1>
-                <h3 className={styles.subheaderText}>
-                    Insurance, Infrastructure, and Privacy Laws
-                </h3>
+            <div className={styles.imageContainer}>
+                <img
+                    src="Hastings-Logo-RGB-Full-H.png"
+                    className={styles.hastingsImage}
+                    alt="The Hastings Center logo"
+                />
+            </div>
+            <div className={styles.imageContainer}>
+                <img src="wave.png" className={styles.waveImage} />
+                <img
+                    src="bridge2ai-logo.png"
+                    className={styles.bridge2AiImage}
+                    alt="Bridge2AI Voice"
+                />
             </div>
         </div>
     );

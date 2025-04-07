@@ -3,7 +3,7 @@ import styles from "./Attributions.module.css";
 const ATTRIBUTIONS = [
     {
         key: "Project Contributors",
-        value: "This map was created as a collaboration between Hastings on the Hill (Erin Williams, Jean-Christophe Bélisle-Pipon, and Vardit Ravitsky) and Bridge to AI Voice. The information was compiled by Ian Stevens and Alden Blatter. The map tool was developed by Alex Crist.",
+        value: "This map was created as a collaboration between Bridge2AI Voice Consortium and Hastings on the Hill. The information was compiled by Ian Stevens (The Hastings Center) and Alden Blatter (Simon Fraser University). The map tool was developed by Alex Crist.",
     },
     {
         key: "Country and State Borders",
