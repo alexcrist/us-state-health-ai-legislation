@@ -43,7 +43,7 @@ const ProjectInfo = () => {
                     Bridge to AI Voice Consortium, Jean-Christophe
                     Bélisle-Pipon, Vardit Ravitsky. “US States Health AI
                     Legislation Dataset.” (2025). Hastings on the Hill.
-                    Retrieved Month, Day, Year, from{" "}
+                    Retrieved [Month Day, Year], from{" "}
                     <a href="med-ai-laws.thehastingcenter.org" target="_">
                         med-ai-laws.thehastingcenter.org
                     </a>
