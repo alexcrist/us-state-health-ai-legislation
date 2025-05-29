@@ -31,10 +31,10 @@ const StateInfo = () => {
                 title={focusedState?.name}
                 descriptions={[
                     `Name: ${focusedState?.name}`,
-                    `Legislative Bills: ${legislations.length}`,
+                    `Laws: ${legislations.length}`,
                 ]}
             />
-            <CardSection title={`Legislative Bills (${legislations.length})`}>
+            <CardSection title={`Laws (${legislations.length})`}>
                 {legislations.map((legislation, index) => {
                     const key = `${legislation[0].data}-${index}`;
                     return (

@@ -6,7 +6,7 @@ const ProjectInfo = () => {
     return (
         <>
             <CardSection>
-                <h2 className={styles.title}>US State Health AI Legislation</h2>
+                <h2 className={styles.title}>US State Health AI Laws</h2>
                 <h3 className={styles.subtitle}>
                     Insurance, Infrastructure, and Privacy Laws
                 </h3>
@@ -35,8 +35,8 @@ const ProjectInfo = () => {
             />
             <CardSection title="Suggested Citation">
                 <div className={styles.citationTitle}>
-                    To cite the US State Health AI Legislation Map, please use
-                    the following citation:
+                    To cite the US State Health AI Laws Map, please use the
+                    following citation:
                 </div>
                 <div className={styles.citation}>
                     Ian Stevens, Alden Blatter, Erin Williams, Yael Bensoussan,

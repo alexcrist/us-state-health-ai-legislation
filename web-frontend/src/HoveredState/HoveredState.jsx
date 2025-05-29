@@ -61,7 +61,7 @@ const HoveredState = ({ x, y }) => {
                     title: `${hoveredState.name}`,
                     descriptions: [
                         `Name: ${hoveredState.name}`,
-                        `Legislative Bills: ${hoveredState.legislations.length}`,
+                        `Laws: ${hoveredState.legislations.length}`,
                     ],
                 });
             }
