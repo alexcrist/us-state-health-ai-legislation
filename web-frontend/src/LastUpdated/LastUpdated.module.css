@@ -1,0 +1,17 @@
+.lastUpdated {
+  left: unset;
+  top: unset;
+  bottom: 10px;
+  right: 10px;
+  padding: 10px;
+  border-radius: 4px;
+  font-size: 12px;
+  position: absolute;
+}
+
+@media (max-aspect-ratio: 1) {
+  .lastUpdated {
+    padding: 5px;
+    font-size: 11px;
+  }
+}
